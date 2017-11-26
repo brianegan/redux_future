@@ -146,19 +146,8 @@ class FutureAction<T> {
   });
 
   @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is FutureAction &&
-          runtimeType == other.runtimeType &&
-          initialAction == other.initialAction &&
-          future == other.future;
-
-  @override
-  int get hashCode => initialAction.hashCode ^ future.hashCode;
-
-  @override
   String toString() {
-    return 'FutureAction{future: $future, initialAction: $initialAction}';
+    return 'FutureAction{future: $future, initialAction: $initialAction, completer: $completer}';
   }
 }
 
