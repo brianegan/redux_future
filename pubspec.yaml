@@ -1,7 +1,7 @@
 name: redux_future
 description: A Redux Middleware for handling Dart Futures as actions
-version: 0.1.0
-homepage: https://gitlab.com/brianegan/redux_future
+version: 0.1.1
+homepage: https://github.com/brianegan/redux_future
 author: Brian Egan <brian@brianegan.com>
 
 environment:

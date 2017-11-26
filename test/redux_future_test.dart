@@ -29,7 +29,7 @@ main() {
           middleware: [futureMiddleware],
         );
         final action = new FutureAction(
-          new Future(() => "Fetch Complete"),
+          new Future.value("Fetch Complete"),
           initialAction: "Fetching",
         );
 
@@ -46,7 +46,7 @@ main() {
           middleware: [futureMiddleware],
         );
         final dispatchedAction = "Friend";
-        final future = new Future(() => dispatchedAction);
+        final future = new Future.value(dispatchedAction);
         final action = new FutureAction(
           future,
           initialAction: "Hi",
@@ -79,6 +79,48 @@ main() {
           completion(contains(exception.toString())),
         );
       });
+
+      test('returns the result of the Future after it has been dispatched',
+          () async {
+        final store = new Store<String>(
+          futureReducer,
+          middleware: [futureMiddleware],
+        );
+        final dispatchedAction = "Friend";
+        final future = new Future.value(dispatchedAction);
+        final action = new FutureAction(
+          future,
+          initialAction: "Hi",
+        );
+
+        store.dispatch(action);
+
+        expect(
+          await action.result,
+          new FutureFulfilledAction(dispatchedAction),
+        );
+      });
+
+      test('returns the error of the Future after it has been dispatched',
+          () async {
+        final store = new Store<String>(
+          futureReducer,
+          middleware: [futureMiddleware],
+        );
+        final exception = new Exception("Khaaaaaaaaaan");
+        final future = new Future.error(exception);
+        final action = new FutureAction(
+          future,
+          initialAction: "Hi",
+        );
+
+        store.dispatch(action);
+
+        expect(
+          await action.result,
+          new FutureRejectedAction(exception),
+        );
+      });
     });
 
     group('Future', () {
@@ -90,7 +132,7 @@ main() {
           middleware: [futureMiddleware],
         );
         final dispatchedAction = "Friend";
-        final future = new Future(() => dispatchedAction);
+        final future = new Future.value(dispatchedAction);
 
         store.dispatch(future);
 
