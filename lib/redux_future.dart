@@ -73,7 +73,7 @@ void futureMiddleware<State>(Store<State> store, action, NextDispatcher next) {
 // Dispatches the result of a future to the Store.
 Future<FutureResultAction> _dispatchResults<State>(
   Store<State> store,
-  Future<FutureResultAction> future,
+  Future<dynamic> future,
 ) {
   return future.then((result) {
     final fulfilledAction = new FutureFulfilledAction(result);
