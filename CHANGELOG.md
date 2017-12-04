@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.2
+
+  - Fix `FutureAction` incorrect type parameter. Fix contributed by [Kezhu Wang](https://github.com/kezhuw)!
+
 ## 0.1.1
 
   - Move to Github

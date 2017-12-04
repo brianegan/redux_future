@@ -57,3 +57,8 @@ main() {
   store.dispatch(new Future.error("Oh no!"));
 }
 ```
+
+## Contributors
+
+  * [Brian Egan](http://github.com/brianegan)
+  * [Kezhu Wang](https://github.com/kezhuw)
