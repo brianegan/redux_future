@@ -59,7 +59,7 @@ import 'package:redux/redux.dart';
 void futureMiddleware<State>(Store<State> store, action, NextDispatcher next) {
   if (action is FutureAction) {
     if (action.initialAction != null) {
-      next(action.initialAction);
+      store.dispatch(action.initialAction);
     }
 
     _dispatchResults(store, action.future).then(action.completer.complete);

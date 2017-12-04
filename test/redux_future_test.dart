@@ -121,6 +121,33 @@ main() {
           new FutureRejectedAction(exception),
         );
       });
+
+      test('dispatchs initial action through Store.dispatch', () async {
+        List<String> logs = <String>[];
+        void loggingMiddleware<State>(Store<State> store, dynamic action, NextDispatcher next) {
+          logs.add(action.toString());
+          next(action);
+        }
+
+        final store = new Store<String>(
+          futureReducer,
+          middleware: [loggingMiddleware, futureMiddleware],
+        );
+        final action = new FutureAction(
+          new Future.value("Friend"),
+          initialAction: "Hi",
+        );
+
+        store.dispatch(action);
+
+        final fulfilledAction = await action.result;
+
+        expect(logs, <String>[
+          action.toString(),
+          "Hi",
+          fulfilledAction.toString(),
+        ]);
+      });
     });
 
     group('Future', () {
