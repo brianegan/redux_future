@@ -29,7 +29,7 @@ main() {
           middleware: [futureMiddleware],
         );
         final action = new FutureAction(
-          new Future.value("Fetch Complete"),
+          new Future<String>.value("Fetch Complete"),
           initialAction: "Fetching",
         );
 
